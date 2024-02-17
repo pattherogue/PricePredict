@@ -7,9 +7,11 @@ from sklearn.preprocessing import LabelEncoder
 from geopy.distance import geodesic
 
 # Specify data types for columns with mixed types
-dtype_dict = {'column_name1': 'float64', 'column_name2': 'int32', 'column_name3': 'object'}
-# Replace 'column_name1', 'column_name2', 'column_name3' with the names of the problematic columns
-# and 'float64', 'int32', 'object' with the desired data types
+dtype_dict = {
+    'column_name1': 'float64',  # Replace 'column_name1' with the name of the column
+    'column_name2': 'int32',    # Replace 'column_name2' with the name of the column
+    'column_name3': 'object'    # Replace 'column_name3' with the name of the column
+}
 
 # Load the dataset with specified data types
 df = pd.read_csv('AB_US_2023.csv', dtype=dtype_dict, low_memory=False)
