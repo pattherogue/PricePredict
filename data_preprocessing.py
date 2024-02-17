@@ -6,11 +6,20 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.preprocessing import LabelEncoder
 from geopy.distance import geodesic
 
-# Load the dataset
-df = pd.read_csv('AB_US_2023.csv')
+# Specify data types for columns with mixed types
+dtype_dict = {'column_name1': 'float64', 'column_name2': 'int32', 'column_name3': 'object'}
+# Replace 'column_name1', 'column_name2', 'column_name3' with the names of the problematic columns
+# and 'float64', 'int32', 'object' with the desired data types
+
+# Load the dataset with specified data types
+df = pd.read_csv('AB_US_2023.csv', dtype=dtype_dict, low_memory=False)
+
+# Define latitude and longitude of the city center
+city_center_latitude = 40.7128  # Example latitude of the city center (e.g., New York)
+city_center_longitude = -74.0060  # Example longitude of the city center (e.g., New York)
 
 # Brainstorm features
-# Example: Calculate distance from city center
+# Calculate distance from city center
 city_center_coords = (city_center_latitude, city_center_longitude)  # Coordinates of the city center
 property_coords = list(zip(df['latitude'], df['longitude']))  # Coordinates of properties
 distances_from_city_center = [geodesic(property_coords[i], city_center_coords).kilometers for i in range(len(df))]
